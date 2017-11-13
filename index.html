@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="wrapper" onload="startGame()">
+
+    <section id="start" class="start column">
+        <img src="img/logo.png" alt="Альтернативный заголовок">
+        <form action="" class="column">
+            <input type="text" placeholder="Имя игрока">
+            <button type="submit" id="startbutton"><span>Начать играть</span></button>
+        </form>
+        <div class="row">
+            <a href="" class="btn-top"></a>
+            <a href="" class="btn-settings"></a>
+            <a href="" class="btn-guide"></a>
+        </div>
+    </section>
+    <section id="game" class="game">
+        <canvas id="canvas">   </canvas>
+        <a href="#" class="btn boom"><span>pause</span></a>
+    </section>
+
+    <section class="top column hidden" id="top">
+        <h2 class="title">Топ игроков</h2>
+        <div class="top-list">
+            <ul>
+                <li>1. NO NAME - 1234 <img src="img/first-star.png" alt="Альтернативный заголовок"></li>
+                <li>2. NO NAME - 999 <img src="img/star.png" alt="Альтернативный заголовок"></li>
+                <li>3. NO NAME - 768 <img src="img/star.png" alt="Альтернативный заголовок"></li>
+                <li>4. NO NAME - 543 <img src="img/star.png" alt="Альтернативный заголовок"></li>
+                <li>5. NO NAME - 237 <img src="img/star.png" alt="Альтернативный заголовок"></li>
+            </ul>
+        </div>
+        <div class="result hidden">
+        </div>
+        <div class="row">
+            <a href="" class="btn menu"><span>Меню</span></a>
+            <a href="" class="btn togame"><span>Играть</span></a>
+        </div>
+    </section>
+    <section class="info column hidden" id="info">
+        <h2 class="title">Как играть</h2>
+        <div class="info-list">
+            <ul>
+                <li><span>1. Управление кораблем
+                    в игре с помощью кнопок W A S D </span><img src="img/guide/rocket.png" alt="Альтернативный заголовок"></li>
+                <li><span>2. Для поддержания корабля
+                    в пространстве собирайте топливо </span><img src="img/guide/gallon.png" alt="Альтернативный заголовок"></li>
+                <li><span>3. Уворачивайтесь от метеоритов,
+                    летящих навстречу </span><img src="img/guide/meteor.png" alt="Альтернативный заголовок"></li>
+                <li><span>4. Собирайте как можно больше
+                    звездочек </span><img src="img/guide/star.png" alt="Альтернативный заголовок"></li>
+            </ul>
+        </div>
+        <div class="row">
+            <a href="" class="btn menu"><span>Меню</span></a>
+            <a href="" class="btn togame"><span>Играть</span></a>
+        </div>
+    </section>
+    <section class="pause column hidden" id="pause">
+        <h2 class="title">Пауза</h2>
+        <a href="#" class="btn boom middle"><span>Вернуться</span></a>
+    </section>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        $('#startbutton').click(function (event) {
+            event.preventDefault();
+            GameArea.hidescreens();
+            GameArea.refresh();
+            GameArea.showscreen('#canvas');
+            GameArea.start();
+        });
+        $('.togame').click(function (event) {
+           event.preventDefault();
+           GameArea.hidescreens();
+           GameArea.refresh();
+           GameArea.showscreen('#canvas');
+           GameArea.start();
+        });
+        $('.menu').click(function (event) {
+            event.preventDefault();
+            GameArea.hidescreens();
+            GameArea.showscreen('#start');
+        });
+        $('.btn-top').click(function (event) {
+            event.preventDefault();
+            GameArea.hidescreens();
+            GameArea.showscreen('#top');
+        });
+        $('.btn-guide').click(function (event) {
+          event.preventDefault();
+          GameArea.hidescreens();
+          GameArea.showscreen('#info');
+        });
+        var flag=true;
+
+        $('.boom').click(function (event) {
+          event.preventDefault();
+            if (flag===true) {
+              GameArea.pause();
+              flag=false;
+              sounds.background.stop();
+
+            } else {
+                GameArea.hidescreens();
+              GameArea.showscreen('#canvas');
+              GameArea.start();
+              flag=true;
+            }
+        });
+
+    </script>
+    <script src="js/game.js"></script>
+</body>
+</html>
